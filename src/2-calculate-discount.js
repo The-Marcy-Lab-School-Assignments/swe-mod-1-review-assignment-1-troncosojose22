@@ -5,10 +5,13 @@ Analyze the following code. Identify the bug and fix it. Then, below, explain wh
 
 */
 const calculateDiscount = (price) => {
+  // discountRate was being declared inside the scope of the if statements, and let and const variables are block scoped, so it was unreachable for the rest of the code
+  let discountRate;
+
   if (price > 100) {
-    const discountRate = 0.1;
+    discountRate = 0.1;
   } else {
-    const discountRate = 0.05;
+    discountRate = 0.05;
   }
 
   const discount = price * discountRate;
