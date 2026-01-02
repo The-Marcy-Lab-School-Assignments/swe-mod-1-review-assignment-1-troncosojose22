@@ -1,6 +1,7 @@
 # Short Responses
 
 For this short response assignment, aim to write a response with the following qualities (your instructor will give you feedback on these areas):
+
 - [] Addresses all parts of the prompt
 - [] Accurately uses relevant technical terminology
 - [] Is free of grammar and spelling mistakes (double check with grammarly!)
@@ -16,25 +17,30 @@ Using the code block below, explain what it means for a function call to be an "
 ```js
 const double = (num) => {
   return num * 2;
-}
+};
 
 const result = double(5);
 ```
 
 In your response, make sure to cover the following details:
+
 1. Explain what an "expression" is.
 2. Explain how it is determined what value a function call will resolve/evaluate to.
 3. Explain why function calls sometimes resolve/evaluate to `undefined`.
 
 ### Response 1
 
-Your response...
+An **expression** is a piece of **code** that evaluates to a value.
+
+A **function call** evaluates to the resolution of the expression in the **return statement** inside the function.
+
+If no expression is given to the return statement, or if not return statement is provided, the function call will implicitly evaluate to `undefined`
 
 ---
 
 ## Prompt 2
 
-Analyze the following code. Then, fill in the template below with the callstack and the values of all variables at the moment when the `getFirstLetter()` function has just been called *for the first time* but has NOT yet returned.
+Analyze the following code. Then, fill in the template below with the callstack and the values of all variables at the moment when the `getFirstLetter()` function has just been called _for the first time_ but has NOT yet returned.
 
 ```js
 const buildProfile = (firstName, lastName, age) => {
@@ -42,23 +48,23 @@ const buildProfile = (firstName, lastName, age) => {
   const initials = extractInitials(firstName, lastName);
   const bio = `${fullName} (${initials}) - Age: ${age}`;
   return bio;
-}
+};
 
 const createFullName = (first, last) => {
   const fullName = first + " " + last;
   return fullName;
-}
+};
 
 const extractInitials = (first, last) => {
   const firstInitial = getFirstLetter(first); // <--- we're in this function call
   const lastInitial = getFirstLetter(last);
   return firstInitial + lastInitial;
-}
+};
 
 const getFirstLetter = (name) => {
   // ***draw the callstack at this moment before the return***
   return name[0].toUpperCase();
-}
+};
 
 const userProfile = buildProfile("reuben", "ogbonna", 24);
 console.log(userProfile); // reuben ogbonna (RO) - Age: 24
@@ -76,40 +82,43 @@ console.log(userProfile); // reuben ogbonna (RO) - Age: 24
 ```
 Callstack: (recent calls at the top)
 ---------------------------
-[           ]
-[           ]
-[           ]
-[           ]
+[getFirstLetter           ]
+[extractInitials           ]
+[buildProfile           ]
+[global          ]
 
 
 Variables by Scope:
 ---------------------------
 Global Scope:
-- buildProfile = ?
-- createFullName = ?
-- extractInitials = ?
-- getFirstLetter = ?
-- userProfile = ?
+- buildProfile = function reference
+- createFullName = function reference
+- extractInitials = function reference
+- getFirstLetter = function reference
+- userProfile = waiting...
 
 buildProfile() scope:
-- firstName = ?
-- lastName = ?
-- age = ?
-- fullName = ?
-- initials = ?
-- bio = ?
+- firstName = 'reuben'
+- lastName = 'ogbonna'
+- age = 24
+- fullName = 'reuben ogbonna'
+- initials = waiting...
+- bio = undefined
 
-createFullName() scope:
+createFullName() scope: function
 - (list any parameters/variables)
+- first
+- last
+- fullName
 
-extractInitials() scope:
-- first = ?
-- last = ?
-- firstInitial = ?
-- lastInitial = ?
+extractInitials() scope: function
+- first = 'reuben'
+- last = 'ogbonna'
+- firstInitial = waiting...
+- lastInitial = undefined
 
-getFirstLetter() scope:
-- name = ?
+getFirstLetter() scope: function
+- name = 'reuben'
 ```
 
 ---
@@ -125,7 +134,7 @@ let count = 0;
 
 const incrementA = () => {
   count = count + 1;
-}
+};
 
 incrementA();
 console.log(count);
@@ -139,7 +148,7 @@ let count = 0;
 const incrementB = () => {
   let count = 0;
   count = count + 1;
-}
+};
 
 incrementB();
 console.log(count);
@@ -147,7 +156,11 @@ console.log(count);
 
 ### Response 3
 
-Your response...
+The first code snippet will print the number 1.
+
+Second code snippet will print the number 0.
+
+The difference is that in the second code snippet, we are **initializing** a new `count` **variable** using the `let` **keyword** (`let` variables are block scoped) and updating its value inside the **scope** of the `incrementB` function. This doesn't update the value of the `count` variable that was declared in the **global scope**.
 
 ---
 
@@ -173,7 +186,9 @@ Which approach would you choose and why? In your answer, identify at least one p
 
 ### Response 4
 
-Your response...
+I would choose approach A, but I would add a **guard clause**, because if the name to remove was not present in the `students` array, the `indexOf` method would **return** -1, which would cause an incorrect **element** to be removed.
+
+Approach B takes more lines of code, and it immutably removes the element, creating a new array to do so.
 
 ---
 
@@ -183,9 +198,9 @@ Label the basic array methods below with a 1-sentence description of what they d
 
 ### Response 5
 
-- `push(value)` - ???
-- `pop()` - ???
-- `shift()` - ???
-- `unshift(value)` - ???
-- `splice(index, deleteCount)` - ???
-- `slice(start, end)` - ???
+- `push(value)` - adds a given value to the end of an array `(mutating)`
+- `pop()` - removes the last element of an array `(mutating)`
+- `shift()` - removes the first element of an array `(mutating)`
+- `unshift(value)` - adds a given value to the beginning of an array `(mutating)`
+- `splice(index, deleteCount)` - changes the contents of an array, removing or replacing existing elements `(mutating)`
+- `slice(start, end)` - returns a subarray of a given array, selected from `start` to `end` `(non-mutating)`
