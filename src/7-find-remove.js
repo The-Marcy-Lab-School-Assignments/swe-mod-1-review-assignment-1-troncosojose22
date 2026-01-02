@@ -13,6 +13,8 @@ const findAndRemove = (arr, target) => {
     const index = arr.indexOf(target);
     arr.splice(index, 1);
     }
+  
+  return arr;
 }
 
 const items = ["apple", "banana", "orange"];

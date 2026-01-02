@@ -82,40 +82,43 @@ console.log(userProfile); // reuben ogbonna (RO) - Age: 24
 ```
 Callstack: (recent calls at the top)
 ---------------------------
-[           ]
-[           ]
-[           ]
-[           ]
+[getFirstLetter           ]
+[extractInitials           ]
+[buildProfile           ]
+[global          ]
 
 
 Variables by Scope:
 ---------------------------
 Global Scope:
-- buildProfile = ?
-- createFullName = ?
-- extractInitials = ?
-- getFirstLetter = ?
-- userProfile = ?
+- buildProfile = function reference
+- createFullName = function reference
+- extractInitials = function reference
+- getFirstLetter = function reference
+- userProfile = waiting...
 
 buildProfile() scope:
-- firstName = ?
-- lastName = ?
-- age = ?
-- fullName = ?
-- initials = ?
-- bio = ?
+- firstName = 'reuben'
+- lastName = 'ogbonna'
+- age = 24
+- fullName = 'reuben ogbonna'
+- initials = waiting...
+- bio = undefined
 
-createFullName() scope:
+createFullName() scope: function
 - (list any parameters/variables)
+- first
+- last
+- fullName
 
-extractInitials() scope:
-- first = ?
-- last = ?
-- firstInitial = ?
-- lastInitial = ?
+extractInitials() scope: function
+- first = 'reuben'
+- last = 'ogbonna'
+- firstInitial = waiting...
+- lastInitial = undefined
 
-getFirstLetter() scope:
-- name = ?
+getFirstLetter() scope: function
+- name = 'reuben'
 ```
 
 ---
@@ -155,7 +158,7 @@ console.log(count);
 
 The first code snippet will print the number 1.
 
-Second code snippet will print the number 2.
+Second code snippet will print the number 0.
 
 The difference is that in the second code snippet, we are **initializing** a new `count` **variable** using the `let` **keyword** (`let` variables are block scoped) and updating its value inside the **scope** of the `incrementB` function. This doesn't update the value of the `count` variable that was declared in the **global scope**.
 
@@ -185,7 +188,7 @@ Which approach would you choose and why? In your answer, identify at least one p
 
 I would choose approach A, but I would add a **guard clause**, because if the name to remove was not present in the `students` array, the `indexOf` method would **return** -1, which would cause an incorrect **element** to be removed.
 
-Approach B takes more lines of code, and it doesn't accomplish the task at hand, we were asked to remove a student's names from an **array**, not create a new array.
+Approach B takes more lines of code, and it immutably removes the element, creating a new array to do so.
 
 ---
 
